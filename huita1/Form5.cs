@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace huita1
+﻿namespace huita1
 {
     public partial class Form5 : Form
     {
@@ -35,7 +25,7 @@ namespace huita1
                 for (int j = 0 + i; j < n; j++)
                 {
 
-                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value);
+                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value.ObjectToDouble());
                 }
 
             }
@@ -56,11 +46,10 @@ namespace huita1
                 for (int j = 0 + i; j < n; j++)
                 {
 
-                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value);
+                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value.ObjectToDouble());
                 }
 
             }
-            MessageBox.Show(message);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -72,7 +61,7 @@ namespace huita1
                 for (int j = 0; j < n; j++)
                 {
 
-                    result[i] += Convert.ToDouble(dataGridView1.Rows[j].Cells[i + 1].Value);
+                    result[i] += Convert.ToDouble(dataGridView1.Rows[j].Cells[i + 1].Value.ObjectToDouble());
 
                 }
 
@@ -83,11 +72,10 @@ namespace huita1
             for (int i = 0; i < n; i++)
             {
 
-                Vi[i] = Math.Round((array[i, n-1] / result[n - 1]), 3);
-                dataGridView1.Rows[n + 1].Cells[i + 1].Value = Vi[i];
+                Vi[i] = array[i, n-1] / result[n - 1];
+                dataGridView1.Rows[n + 1].Cells[i + 1].Value = Math.Round(Vi[i], 3);
             }
 
-            MessageBox.Show(message);
             Program.f1.ComfortVi = Vi;
             Program.f1.checkBox4.Checked = true;
         }

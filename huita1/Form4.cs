@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace huita1
+﻿namespace huita1
 {
     public partial class Form4 : Form
     {
-       public static int n = 4;
+        public static int n = 4;
         private double[,] array = new double[n, n];
         public double[] Vi = new double[n];
         double[] result = new double[n];
+
         public Form4()
         {
             InitializeComponent();
@@ -28,10 +19,7 @@ namespace huita1
             dataGridView1.Rows.Add("Весовые коэффициенты", "", "", "", "");
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -40,10 +28,8 @@ namespace huita1
             {
                 for (int j = 0 + i; j < n; j++)
                 {
-
-                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value);
+                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value.ObjectToDouble());
                 }
-
             }
 
             for (int i = 1; i < n; i++)
@@ -51,29 +37,20 @@ namespace huita1
                 for (int j = 0; j < i; j++)
                 {
                     var value = 1.0 / array[j, i];
-                    dataGridView1.Rows[i].Cells[j + 1].Value = Math.Round(value, 1);
-
+                    dataGridView1.Rows[i].Cells[j + 1].Value = Math.Round(value, 3);
                 }
-
             }
 
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0 + i; j < n; j++)
                 {
-
-                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value);
+                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j + 1].Value.ObjectToDouble());
                 }
-
             }
-            MessageBox.Show(message);
-
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-         
-        }
+        private void button2_Click(object sender, EventArgs e) { }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -82,22 +59,18 @@ namespace huita1
             {
                 for (int j = 0; j < n; j++)
                 {
-
-                    result[i] += Convert.ToDouble(dataGridView1.Rows[j].Cells[i + 1].Value);
-
+                    result[i] += Convert.ToDouble(dataGridView1.Rows[j].Cells[i + 1].Value.ObjectToDouble());
                 }
 
                 dataGridView1.Rows[n].Cells[i + 1].Value = result[i];
-
-
             }
+
             for (int i = 0; i < n; i++)
             {
-
-                Vi[i] = Math.Round((array[i, n -1] / result[n - 1]), 2);
-                dataGridView1.Rows[n + 1].Cells[i + 1].Value = Vi[i];
+                Vi[i] = array[i, n - 1] / result[n - 1];
+                dataGridView1.Rows[n + 1].Cells[i + 1].Value = Math.Round(Vi[i], 3);
             }
-            MessageBox.Show(message);
+
             Program.f1.checkBox3.Checked = true;
             Program.f1.DinamicVi = Vi;
         }
